@@ -1,3 +1,6 @@
 
 # Github Repository Muhamad Irfan Maulana
-Pengumpulan tugas React kelas D
+Nama Lengkap    : Muhamad Irfan Maulana
+Nama Panggilan  : Irfan
+Universitas     : Universitas Gunadarma
+Semester        : -

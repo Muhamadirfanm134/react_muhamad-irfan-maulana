@@ -10,3 +10,6 @@ Git Flow Pak Dengklek:
 [9] git push
 [10] create pull request
 [11] merge pull request
+[12] test pull request
+[13] that's new
+[14] that's crazy!

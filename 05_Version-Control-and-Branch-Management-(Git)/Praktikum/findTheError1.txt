@@ -8,9 +8,11 @@ Git Flow Pak Dengklek:
 [7] git add .
 [8] git commit -m 'feat(new-feature): add something crazy!'
 [9] git push
-[10] create pull request
+[10] create pull request from feat/new-feature to development
 [11] merge pull request
-[12] test pull request
-[13] that's new
-[14] that's crazy!
-[15] test new
+[12] confirm pull request
+[13] delete source branch
+[14] create pull request from development to main
+[15] merge pull request
+[16] confirm pull request
+[17] delete source branch

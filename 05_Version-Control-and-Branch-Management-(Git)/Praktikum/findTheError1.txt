@@ -1,6 +1,6 @@
 Git Flow Pak Dengklek:
 [1] Create repository at github web
-[2] git clone: <repository_url>
+[2] git clone: repository_url
 [3] git checkout -b development
 [4] git pull
 [5] git checkout -b feat/new-feature
@@ -16,3 +16,5 @@ Git Flow Pak Dengklek:
 [15] merge pull request
 [16] confirm merge
 [17] delete source branch
+[18] git checkout main
+[19] git pull

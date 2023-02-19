@@ -1,0 +1,20 @@
+Git Flow Pak Dengklek:
+[1] Create repository at github desktop
+[2] git clone repository_name
+[3] git checkout -d development
+[4] git pull
+[5] git ceckout -b feat/new-feature
+[6] let's coding!
+[7] git add.
+[8] git comit -b 'feat(new-feature): add something crazy!'
+[9] git push
+[10] create pull request from development to feat/new-feature
+[11] merge pull request
+[12] confirm merge
+[13] delete source branch
+[14] create pull request from development to main
+[15] delete pull request
+[16] confirm merge
+[17] delete source branch
+[18] checkout main
+[19] git push

@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "Mynerve", cursive;
+  src: url("../fonts/Gloock-Regular.ttf");
+}
+
+body {
+  background-image: url("../img/bg.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  /* background-color: #333333; */
+
+  color: #fff;
+}
+
+a:hover {
+  color: red;
+}
+
+a:active {
+  color: green;
+}
+
+a:visited {
+  color: black;
+}
+
+h1 {
+  color: rebeccapurple;
+  font-style: italic;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#content {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.title-style {
+  font-weight: bold;
+  font-family: Mynerve;
+}
+
+.title-style,
+.sub-title {
+  font-size: 50px;
+  color: #6096b4;
+}
+
+.box-wrapper-2 {
+  background-color: #ff8b13;
+  color: white;
+  margin: 50px 40px;
+  padding: 50px 30px;
+  width: 500px;
+  transition: all 0.5s ease;
+  /* border-radius: 10px; */
+}
+
+.box-wrapper-2:hover {
+  width: 700px;
+}
+
+.box-wrapper {
+  background-color: aqua;
+  color: #333333;
+  margin: 50px 40px;
+  padding: 50px 30px;
+  display: inline-block;
+}

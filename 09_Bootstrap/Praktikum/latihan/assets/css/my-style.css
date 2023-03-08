@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Gloock";
+  font-weight: 400;
+  src: url("../fonts/Gloock-Regular.ttf") format("truetype");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a:hover {
+  color: #71c55f !important;
+}
+
+.brand-style {
+  font-family: "Gloock";
+  color: grey;
+}
+
+.content-main-bg {
+  margin-top: 120px;
+  background-image: url("../img/wave.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: calc(90vh);
+}
+
+.text-welcome {
+  color: #71c55f !important;
+  font-family: "Gloock";
+}
+
+.image-style {
+  height: 350px;
+}
+
+.contact-section-style {
+  background-color: #71c55f;
+}
+
+.section-title {
+  color: #fff;
+}
+
+.contact-section-style {
+  min-height: 300px;
+}

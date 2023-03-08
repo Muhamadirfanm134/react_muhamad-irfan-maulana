@@ -1,0 +1,41 @@
+@font-face {
+    family: "Mynerve"
+    font-weight: 400;
+    src: url("https://fonts/Mynerve-Regular.ttf") format("truetype");
+  }
+
+body {
+    background-color: url("../img/bg3.jpeg");
+    background-size: cover;
+    background-repeat: cover;
+    padding: 20px;
+    height: 100%;
+}
+
+table {
+    border: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border-bottom: 1px solid #ddd;
+    text-align: bold;
+}
+
+tr:nth-child(odd) {
+    background-color: #deebec;
+}
+
+.wrapper {
+    background-color: 3a97b9ae;
+    color: white;
+    padding: 25px 35px 0px 0px 1px;
+    border-radius: 15;
+}
+
+text-info {
+    font-size: 14px;
+    text-style: italic;
+}
+

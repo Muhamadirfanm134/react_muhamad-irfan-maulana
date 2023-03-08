@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "Mynerve";
+  font-weight: 400;
+  src: url("../fonts/Mynerve-Regular.ttf") format("truetype");
+}
+
+body {
+  background-color: #333333;
+  /* background-image: url("../img/bg3.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat; */
+  padding: 20px;
+  height: 100vh;
+}
+
+p {
+  color: #eeeeee;
+  text-align: justify;
+}
+
+h1,
+h2,
+h3 {
+  color: #eeeeee;
+  font-style: italic;
+  font-family: "Gloock", serif;
+}
+
+a {
+  margin-right: 10px;
+  color: #333333;
+  transition: all 0.5s ease;
+}
+
+a:hover {
+  color: #3a98b9;
+}
+
+a:active {
+  color: #e8d5c4;
+}
+
+a:visited {
+  color: #eeeeee;
+}
+
+#box-wrapper {
+  background-color: #e8d5c4;
+  color: #333333;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.box-wrapper {
+  background-color: #3a97b9ae;
+  color: #eeeeee;
+  padding: 25px 35px;
+  border-radius: 15px;
+  width: 500px;
+  transition: width 2s;
+}
+
+.box-wrapper-2 {
+  background-color: #eeeeeeb0;
+  color: #333333;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  width: 500px;
+  transition: width 2s;
+}
+
+.box-wrapper-2:hover,
+.box-wrapper:hover {
+  width: 700px;
+}
+
+.title {
+  font-size: 24px;
+  /* font-weight: bold; */
+  margin-bottom: 10px;
+  font-family: "Mynerve", cursive;
+}
+
+.title-section {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #eeeeee;
+  font-family: "Gloock", serif;
+}
+
+.bio-info {
+  font-size: 14px;
+  font-style: italic;
+}

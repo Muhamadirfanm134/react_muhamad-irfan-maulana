@@ -1,0 +1,147 @@
+body {
+  background-color: #333333;
+
+  color: #ffffff;
+  padding: 0px 30px;
+  width: 1000px;
+}
+
+p {
+  font-size: 14px;
+}
+
+a {
+  margin-right: 5px;
+  background-color: #439a97;
+  color: #ffffff;
+  transition: all 0.5s ease;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #deebec;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.title-box {
+  background-color: #439a97;
+  font-size: 22px;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.image-style {
+  width: 300px;
+  margin-left: 20px;
+}
+
+.flex-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.about-wrapper {
+  background-color: #ffffff;
+  color: #333333;
+  display: flex;
+  padding: 25px 35px;
+  border-radius: 20px;
+}
+
+.box-wrapper {
+  background-image: url("../img/card-bg.webp");
+  background-size: cover;
+  background-position: center;
+  color: #333333;
+  padding: 25px 35px;
+  border-radius: 20px;
+  display: flex;
+}
+
+.quote-wrapper:hover {
+  width: 600px;
+}
+
+.quote-wrapper {
+  background-color: #fffbeb;
+  padding: 10px;
+  color: #333333;
+  display: flex;
+  margin-bottom: 40px;
+  width: 300px;
+  transition: width 2s;
+}
+
+.hobby-wrapper {
+  background-color: #ffffff;
+  color: #333333;
+  display: flex;
+  padding: 20px;
+  border-radius: 20px;
+  margin-right: 20px;
+  transition: all 0.5s ease;
+}
+
+.hobby-wrapper:hover,
+.grid-item:hover {
+  transform: scale(1.1);
+}
+
+.quote-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.avatar-style {
+  height: 100px;
+  width: 100px;
+  margin-right: 20px;
+}
+
+.hobby-icon {
+  width: 150px;
+  margin-right: 20px;
+}
+
+.footer-style {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: auto auto;
+  padding: 10px 0px;
+}
+
+.grid-item {
+  background-color: #ffffff;
+  color: #333333;
+  display: flex;
+  padding: 20px;
+  border-radius: 20px;
+  transition: all 0.5s ease;
+}

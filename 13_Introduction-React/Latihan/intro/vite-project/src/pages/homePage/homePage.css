@@ -1,0 +1,21 @@
+.homepage {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.image-2 {
+  width: 100px;
+  height: 100px;
+}
+
+.card {
+  background-color: aqua;
+  margin: 10px;
+  color: #333333;
+  border-radius: 20px;
+}
+
+.button-style {
+  background-color: #333333;
+  color: #fff;
+}

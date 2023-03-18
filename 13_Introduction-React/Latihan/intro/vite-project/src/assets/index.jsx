@@ -1,4 +1,5 @@
-import DesignerImage from "./Designer_Two Color.svg";
-import ReactLogo from "./react.svg";
+import Image from "./images/image.jpg";
+import ReactLogo from "./images/react.svg";
+import Thingking from "./images/Thingking.svg";
 
-export default { DesignerImage, ReactLogo };
+export { Image, ReactLogo, Thingking };

@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
+import { ButtonComponent } from "../../components/buttonComponent/ButtonComponent";
 import "../homePage/homePage.css";
 import "./aboutMe.css";
 import { USERS_DATA } from "./constants";

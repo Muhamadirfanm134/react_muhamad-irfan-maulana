@@ -1,9 +1,13 @@
 import React from "react";
 import reactLogo from "../../assets/images/react.svg";
-import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
+
 import "./homePage.css";
 import "../aboutMe/aboutMe.css";
 import { Button, Space } from "antd";
+import {
+  CancelButton,
+  OkayButton,
+} from "../../components/buttonComponent/ButtonComponent";
 
 const HomePage = () => {
   const user = {
@@ -39,19 +43,28 @@ const HomePage = () => {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <ButtonComponent />
+
       <br />
       <br />
 
       {/* AntD Component */}
       <Space wrap>
-        <Button type="primary" className="button-style">
+        <Button type="primary" href="/login">
           Coba Button
         </Button>
         <Button>Default Button</Button>
         <Button type="dashed">Dashed Button</Button>
-        <Button type="text">Text Button</Button>
-        <Button type="link">Link Button</Button>
+        <Button type="text" href="/login">
+          Text Button
+        </Button>
+        <Button type="link" href="/login">
+          Link Button
+        </Button>
+      </Space>
+      <br />
+      <Space wrap>
+        <Button type="primary">Submit</Button>
+        <CancelButton text="Cancel" />
       </Space>
     </div>
   );

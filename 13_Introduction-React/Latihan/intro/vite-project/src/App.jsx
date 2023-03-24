@@ -1,4 +1,5 @@
 import "./App.css";
+import LayoutComponent from "./components/layouts/LayoutComponent";
 import AboutMe from "./pages/aboutMe/AboutMe";
 import FormComponent from "./pages/form/FormComponent";
 
@@ -9,7 +10,7 @@ import Route from "./router/Route";
 
 function App() {
   return (
-    <div className="App">
+    <LayoutComponent>
       <Route path="/">
         <HomePage />
       </Route>
@@ -25,7 +26,7 @@ function App() {
       <Route path="/login">
         <LoginPage />
       </Route>
-    </div>
+    </LayoutComponent>
   );
 }
 

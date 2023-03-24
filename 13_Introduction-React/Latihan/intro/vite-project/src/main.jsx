@@ -6,9 +6,7 @@ import "./index.css";
 import { ThemeConfig } from "./themes/themeConfig";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ConfigProvider theme={ThemeConfig}>
-      <App />
-    </ConfigProvider>
-  </React.StrictMode>
+  <ConfigProvider theme={ThemeConfig}>
+    <App />
+  </ConfigProvider>
 );

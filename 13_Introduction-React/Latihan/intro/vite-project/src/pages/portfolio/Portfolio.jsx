@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
+import { ButtonComponent } from "../../components/buttonComponent/ButtonComponent";
 
 const Portfolio = () => {
   return (

@@ -1,96 +1,141 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
-  Cascader,
-  DatePicker,
   Form,
   Input,
-  InputNumber,
+  Typography,
+  Modal,
   Radio,
-  Select,
-  Switch,
-  TreeSelect,
+  Space,
+  DatePicker,
 } from "antd";
-import { useState } from "react";
+import dayjs from "dayjs";
 
 const FormComponent = () => {
-  const [componentSize, setComponentSize] = useState("default");
-  const onFormLayoutChange = ({ size }) => {
-    setComponentSize(size);
+  const { Title } = Typography;
+  const { TextArea } = Input;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const onFinish = (values) => {
+    setIsModalOpen(true);
+    setModalData({ ...values });
   };
 
   return (
     <>
+      <Title>Form Biodata Mahasiswa</Title>
+      <br />
+
+      {/* Form */}
       <Form
-        labelCol={{
-          span: 4,
-        }}
-        wrapperCol={{
-          span: 14,
-        }}
+        name="bio"
         layout="horizontal"
-        initialValues={{
-          size: componentSize,
-        }}
-        onValuesChange={onFormLayoutChange}
-        size={componentSize}
+        onFinish={onFinish}
         style={{
           maxWidth: 600,
         }}
       >
-        <Form.Item label="Input">
-          <Input />
+        <Form.Item
+          name="firstName"
+          label="First Name"
+          rules={[
+            {
+              required: true,
+              message: "Please input your first name!",
+            },
+          ]}
+        >
+          <Input placeholder="Input your first name" />
         </Form.Item>
-        <Form.Item label="Select">
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
-          </Select>
+
+        <Form.Item
+          name="lastName"
+          label="Last Name"
+          rules={[
+            {
+              required: true,
+              message: "Please input your last name!",
+            },
+          ]}
+        >
+          <Input placeholder="Input your last name" />
         </Form.Item>
-        <Form.Item label="TreeSelect">
-          <TreeSelect
-            treeData={[
-              {
-                title: "Light",
-                value: "light",
-                children: [
-                  {
-                    title: "Bamboo",
-                    value: "bamboo",
-                  },
-                ],
-              },
-            ]}
-          />
+
+        <Form.Item
+          name="alamat"
+          label="Alamat"
+          rules={[
+            {
+              required: true,
+              message: "Please input your alamat!",
+            },
+          ]}
+        >
+          <TextArea rows={4} />
         </Form.Item>
-        <Form.Item label="Cascader">
-          <Cascader
-            options={[
-              {
-                value: "zhejiang",
-                label: "Zhejiang",
-                children: [
-                  {
-                    value: "hangzhou",
-                    label: "Hangzhou",
-                  },
-                ],
-              },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item label="DatePicker">
+
+        <Form.Item
+          name="dateOfBirth"
+          label="Date of Birth"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Date of Birth!",
+            },
+          ]}
+        >
           <DatePicker />
         </Form.Item>
-        <Form.Item label="InputNumber">
-          <InputNumber />
+
+        <Form.Item
+          name="agama"
+          label="Agama"
+          rules={[
+            {
+              required: true,
+              message: "Please input your agama!",
+            },
+          ]}
+        >
+          <Radio.Group>
+            <Space direction="vertical">
+              <Radio value="Islam">Islam</Radio>
+              <Radio value="Kristen">Kristen</Radio>
+              <Radio value="Hindu">Hindu</Radio>
+            </Space>
+          </Radio.Group>
         </Form.Item>
-        <Form.Item label="Switch" valuePropName="checked">
-          <Switch />
-        </Form.Item>
-        <Form.Item label="Button">
-          <Button>Button</Button>
-        </Form.Item>
+
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
       </Form>
+
+      {/* Modal */}
+      <Modal
+        title="Basic Modal"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <ol>
+          <li>First Name: {modalData.firstName}</li>
+          <li>Last Name: {modalData.lastName}</li>
+          <li>Alamat: {modalData.alamat}</li>
+          <li>Agama: {modalData.agama}</li>
+          <li>
+            Date of Birth: {dayjs(modalData.dateOfBirth).format("DD MMMM YYYY")}
+          </li>
+        </ol>
+      </Modal>
     </>
   );
 };

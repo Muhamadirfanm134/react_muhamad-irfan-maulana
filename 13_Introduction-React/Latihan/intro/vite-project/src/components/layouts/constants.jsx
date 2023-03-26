@@ -9,4 +9,8 @@ export const MENU_ITEM = [
     label: <Link href="/portfolio">Portfolio</Link>,
     key: "2",
   },
+  {
+    label: <Link href="/about-me">About Me</Link>,
+    key: "3",
+  },
 ];

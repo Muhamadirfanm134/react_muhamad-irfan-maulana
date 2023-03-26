@@ -9,6 +9,10 @@ const useWindowWidth = () => {
 
   useEffect(() => {
     checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   return isSmallScreen;

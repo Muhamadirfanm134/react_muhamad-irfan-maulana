@@ -1,13 +1,10 @@
 import React from "react";
 import reactLogo from "../../assets/images/react.svg";
-
-import "./homePage.css";
-import "../aboutMe/aboutMe.css";
 import { Button, Space } from "antd";
-import {
-  CancelButton,
-  OkayButton,
-} from "../../components/buttonComponent/ButtonComponent";
+import { CancelButton } from "../../components/buttonComponent/ButtonComponent";
+import "../aboutMe/aboutMe.css";
+import "./homePage.css";
+import Gap from "../../components/gap/gap";
 
 const HomePage = () => {
   const user = {
@@ -61,11 +58,15 @@ const HomePage = () => {
           Link Button
         </Button>
       </Space>
-      <br />
+
+      <Gap height={10} />
+
       <Space wrap>
         <Button type="primary">Submit</Button>
         <CancelButton text="Cancel" />
       </Space>
+
+      <Button type="primary">Ini Button</Button>
     </div>
   );
 };

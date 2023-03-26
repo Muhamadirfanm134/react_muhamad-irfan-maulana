@@ -1,0 +1,11 @@
+.error-container {
+  background-color: #feefef;
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin: 8px 0px;
+}
+
+.error-icon {
+  margin-right: 4px;
+  margin-left: 4px;
+}

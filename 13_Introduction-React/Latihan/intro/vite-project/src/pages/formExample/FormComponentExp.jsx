@@ -168,6 +168,7 @@ const FormComponentExp = () => {
               message: "Please input your last name!",
             },
           ]}
+          hasFeedback
         >
           <Input placeholder="Input your last name" />
         </Form.Item>
@@ -181,6 +182,7 @@ const FormComponentExp = () => {
               message: <Error message={"Please input your nim!"} />,
             },
           ]}
+          hasFeedback
         >
           <Input placeholder="Input your nim" />
         </Form.Item>

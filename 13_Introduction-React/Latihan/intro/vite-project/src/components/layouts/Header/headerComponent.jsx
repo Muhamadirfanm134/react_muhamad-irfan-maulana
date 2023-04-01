@@ -1,8 +1,7 @@
 import { Layout, Menu, Row } from "antd";
 import React, { useState } from "react";
 import { MENU_ITEM } from "../constants";
-import Link from "../../../router/Link";
-// import Link from "../../../router/Link";
+import { Link } from "react-router-dom";
 
 const HeaderComponent = () => {
   const { Header } = Layout;
@@ -21,7 +20,7 @@ const HeaderComponent = () => {
       }}
     >
       <Row justify="space-between">
-        <Link href="/">
+        <Link to="/home">
           <div
             style={{
               float: "left",

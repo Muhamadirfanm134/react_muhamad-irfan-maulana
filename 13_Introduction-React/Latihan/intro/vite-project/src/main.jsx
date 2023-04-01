@@ -4,9 +4,12 @@ import App from "./App";
 import { ConfigProvider } from "antd";
 import "./index.css";
 import { ThemeConfig } from "./themes/themeConfig";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ConfigProvider theme={ThemeConfig}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </ConfigProvider>
 );

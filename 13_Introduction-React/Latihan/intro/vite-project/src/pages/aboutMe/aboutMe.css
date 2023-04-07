@@ -7,3 +7,11 @@
   width: 30px;
   height: 30px;
 }
+
+.user-card {
+  background-color: bisque;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 10px 0px;
+  color: #333333;
+}

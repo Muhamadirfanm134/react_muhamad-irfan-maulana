@@ -8,6 +8,7 @@ import HomePage from "../pages/homePage/HomePage";
 import Portfolio from "../pages/portfolio/Portfolio";
 import AboutMe from "../pages/aboutMe/AboutMe";
 import FormComponentExp from "../pages/formExample/FormComponentExp";
+import FormCRUD from "../pages/crud/FormCRUD";
 
 const RouteManagement = () => {
   const token = localStorage.getItem("token");
@@ -28,11 +29,14 @@ const RouteManagement = () => {
       ) : (
         <LayoutComponent>
           <Routes>
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/form" element={<FormComponent />} />
             <Route path="/form-exp" element={<FormComponentExp />} />
+            <Route path="/form-crud" element={<FormCRUD />} />
+
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about-me" element={<AboutMe />} />
+            <Route path="/about-me/:id" element={<AboutMe />} />
           </Routes>
         </LayoutComponent>
       )}

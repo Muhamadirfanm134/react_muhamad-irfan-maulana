@@ -8,7 +8,7 @@ const LoginPage = () => {
 
   const onLogin = () => {
     localStorage.setItem("token", true);
-    navigate("/home");
+    navigate("/");
   };
 
   return (

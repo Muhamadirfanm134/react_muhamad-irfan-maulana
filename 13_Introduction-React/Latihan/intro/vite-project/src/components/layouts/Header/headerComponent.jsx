@@ -20,7 +20,7 @@ const HeaderComponent = () => {
       }}
     >
       <Row justify="space-between">
-        <Link to="/home">
+        <Link to="/">
           <div
             style={{
               float: "left",
@@ -35,7 +35,6 @@ const HeaderComponent = () => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["1"]}
           items={MENU_ITEM}
           disabledOverflow
           onClick={onClick}

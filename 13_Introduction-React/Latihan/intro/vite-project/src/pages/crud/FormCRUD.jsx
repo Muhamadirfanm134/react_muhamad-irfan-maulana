@@ -2,25 +2,25 @@ import {
   Button,
   Form,
   Input,
-  Table,
-  Typography,
   Popconfirm,
   Space,
+  Table,
+  Typography,
 } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { INITIAL_TABLE_DATA } from "./constants";
-import Gap from "../../components/gap/gap";
-import Error from "../../components/error/error";
 
-const FormComponentExp = () => {
+const FormCRUD = () => {
   const { Title } = Typography;
   const { TextArea } = Input;
-  const [form] = Form.useForm();
+
+  const [formBio] = Form.useForm();
 
   const [data, setData] = useState(INITIAL_TABLE_DATA);
-  const [count, setCount] = useState(data.length + 1);
-  const [isEdit, setIsEdit] = useState(false);
+  const [key, setKey] = useState(INITIAL_TABLE_DATA.length + 1);
+
   const [rowData, setRowData] = useState();
+  const [isEdit, setIsEdit] = useState(false);
 
   const TABLE_COLUMNS = [
     {
@@ -53,7 +53,7 @@ const FormComponentExp = () => {
             <Popconfirm
               title="Sure to delete?"
               arrow={false}
-              // onConfirm={() => deleteData(record.key)}
+              onConfirm={() => onDelete(record.key)}
             >
               <a>Delete</a>
             </Popconfirm>
@@ -62,52 +62,45 @@ const FormComponentExp = () => {
     },
   ];
 
-  const handleEdit = (data) => {
-    setRowData(data);
+  //   to handle edit button
+  const handleEdit = (row_data) => {
+    console.log({ row_data });
+    setRowData(row_data);
     setIsEdit(true);
   };
 
+  //   to handle cancel button
   const handleCancel = () => {
-    setIsEdit(false);
     setRowData();
-    form.resetFields();
+    setIsEdit(false);
+    formBio.resetFields();
   };
 
-  const deleteData = (key) => {
-    const newData = data.filter((item) => item.key !== key);
-    setData(newData);
-  };
-
-  const addData = (values) => {
-    const newData = [
-      ...data,
-      {
-        key: count,
-        ...values,
-      },
-    ];
-
-    setData(newData);
-    setCount(count + 1);
-
-    form.resetFields();
-  };
-
-  const editData = (values) => {
-    const key = rowData?.key;
-    const newData = [...data];
-    const index = data.findIndex((item) => key === item.key);
-
-    newData.splice(index, 1, {
+  //   Add Data to table
+  const onAdd = (values) => {
+    const newData = {
       key: key,
       ...values,
-    });
+    };
 
-    setData(newData);
-    setIsEdit(false);
-
-    form.resetFields();
+    setData([...data, newData]);
+    setKey(key + 1);
+    formBio.resetFields();
   };
+
+  //   Delete Data from table
+  const onDelete = (row_key) => {
+    const newData = data.filter((item) => item.key !== row_key);
+    setData(newData);
+  };
+
+  //   Edit Data from table
+  const onEdit = (values) => {
+    console.log({ values });
+    formBio.resetFields();
+  };
+
+  console.log({ data });
 
   return (
     <>
@@ -115,10 +108,13 @@ const FormComponentExp = () => {
 
       {/* Form */}
       <Form
-        form={form}
-        name="bio"
+        name="form-bio"
+        form={formBio}
         layout="horizontal"
-        onFinish={isEdit ? editData : addData}
+        onFinish={isEdit ? onEdit : onAdd}
+        style={{
+          width: "600px",
+        }}
         labelAlign="left"
         labelCol={{
           span: 4,
@@ -126,31 +122,28 @@ const FormComponentExp = () => {
         wrapperCol={{
           span: 14,
         }}
-        style={{
-          maxWidth: 600,
-        }}
         fields={[
           {
             name: ["firstName"],
-            value: isEdit ? rowData?.firstName : null,
+            value: rowData?.firstName,
           },
           {
             name: ["lastName"],
-            value: isEdit ? rowData?.lastName : null,
+            value: rowData?.lastName,
           },
           {
             name: ["nim"],
-            value: isEdit ? rowData?.nim : null,
+            value: rowData?.nim,
           },
           {
             name: ["address"],
-            value: isEdit ? rowData?.address : null,
+            value: rowData?.address,
           },
         ]}
       >
         <Form.Item
-          label="First Name"
           name="firstName"
+          label="First Name"
           rules={[
             {
               required: true,
@@ -162,8 +155,8 @@ const FormComponentExp = () => {
         </Form.Item>
 
         <Form.Item
-          label="Last Name"
           name="lastName"
+          label="Last Name"
           rules={[
             {
               required: true,
@@ -175,21 +168,21 @@ const FormComponentExp = () => {
         </Form.Item>
 
         <Form.Item
-          label="NIM"
           name="nim"
+          label="NIM"
           rules={[
             {
               required: true,
-              message: <Error message={"Please input your nim!"} />,
+              message: "Please input your NIM!",
             },
           ]}
         >
-          <Input placeholder="Input your nim" />
+          <Input placeholder="Input your NIM" />
         </Form.Item>
 
         <Form.Item
-          label="Address"
           name="address"
+          label="Address"
           rules={[
             {
               required: true,
@@ -197,7 +190,7 @@ const FormComponentExp = () => {
             },
           ]}
         >
-          <TextArea placeholder="Input your address" rows={4} />
+          <TextArea rows={4} placeholder="Input your address" />
         </Form.Item>
 
         {isEdit ? (
@@ -205,28 +198,16 @@ const FormComponentExp = () => {
             <Button type="primary" htmlType="submit">
               Save
             </Button>
-            <Button onClick={handleCancel}>Cancel</Button>
+            <Button type="primary" onClick={handleCancel} danger>
+              Cancel
+            </Button>
           </Space>
         ) : (
-          <Form.Item shouldUpdate className="submit">
-            {() => (
-              <Button
-                type="primary"
-                htmlType="submit"
-                disabled={
-                  !form.isFieldsTouched(true) ||
-                  form.getFieldsError().filter(({ errors }) => errors.length)
-                    .length > 0
-                }
-              >
-                Submit
-              </Button>
-            )}
-          </Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         )}
       </Form>
-
-      <Gap height={30} />
 
       {/* Table */}
       <Table columns={TABLE_COLUMNS} dataSource={data} />
@@ -234,4 +215,4 @@ const FormComponentExp = () => {
   );
 };
 
-export default FormComponentExp;
+export default FormCRUD;

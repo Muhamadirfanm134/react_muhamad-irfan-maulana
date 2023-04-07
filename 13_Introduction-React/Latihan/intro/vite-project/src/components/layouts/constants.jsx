@@ -7,12 +7,16 @@ export const MENU_ITEM = [
     key: "1",
   },
   {
-    label: <Link to="/portfolio">Portfolio</Link>,
+    label: <Link to="/form-crud">Form-CRUD</Link>,
     key: "2",
   },
   {
-    label: <Link to="/about-me">About Me</Link>,
+    label: <Link to="/portfolio">Portfolio</Link>,
     key: "3",
+  },
+  {
+    label: <Link to="/about-me">About Me</Link>,
+    key: "4",
   },
   {
     label: (
@@ -28,6 +32,6 @@ export const MENU_ITEM = [
         </Button>
       </Link>
     ),
-    key: "4",
+    key: "5",
   },
 ];

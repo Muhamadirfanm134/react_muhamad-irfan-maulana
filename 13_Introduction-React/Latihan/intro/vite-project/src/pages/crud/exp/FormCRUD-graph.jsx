@@ -1,3 +1,4 @@
+import { useMutation, useQuery } from "@apollo/client";
 import {
   Button,
   Form,
@@ -6,30 +7,47 @@ import {
   Space,
   Table,
   Typography,
+  message,
 } from "antd";
 import React, { useEffect, useState } from "react";
-import { INITIAL_TABLE_DATA } from "./constants";
+import Gap from "../../../components/gap/Gap";
+import { INITIAL_TABLE_DATA } from "../constants";
 import {
-  useDeleteBiodata,
-  useGetBiodata,
-  usePostBiodata,
-  useUpdateBiodata,
-} from "./hooks/useBiodatas";
-import Gap from "../../components/gap/Gap";
+  ADD_USER,
+  DELETE_USER,
+  GET_USERS,
+  UPDATE_USER,
+} from "../query/users-query";
 
-const FormCRUD = () => {
+const FormCRUD_graph = () => {
   const { Title } = Typography;
   const { TextArea } = Input;
-
-  const [isLoadingBiodata, biodata, getBiodata] = useGetBiodata();
-  const [isLoadingCreateBiodata, createBiodata] = usePostBiodata();
-  const [isLoadingDeleteBiodata, deleteBiodata] = useDeleteBiodata();
-  const [isLoadingUpdateBiodata, updateBiodata] = useUpdateBiodata();
-
   const [formBio] = Form.useForm();
 
-  const [data, setData] = useState(INITIAL_TABLE_DATA);
-  const [key, setKey] = useState(INITIAL_TABLE_DATA.length + 1);
+  // Get Data
+  const {
+    data: usersData,
+    loading: isUsersLoading,
+    error: usersError,
+  } = useQuery(GET_USERS);
+
+  // Add Data
+  const [addUser, { loading: loadingAddUser }] = useMutation(ADD_USER, {
+    refetchQueries: [GET_USERS],
+  });
+
+  // Update Data
+  const [updateUser, { loading: loadingUpdateUser }] = useMutation(
+    UPDATE_USER,
+    {
+      refetchQueries: [GET_USERS],
+    }
+  );
+
+  // Delete Data
+  const [deleteUser, { loading: loadingDelete }] = useMutation(DELETE_USER, {
+    refetchQueries: [GET_USERS],
+  });
 
   const [rowData, setRowData] = useState();
   const [isEdit, setIsEdit] = useState(false);
@@ -89,16 +107,31 @@ const FormCRUD = () => {
 
   //   Add Data to table
   const onAdd = (values) => {
-    createBiodata(values, () => {
-      getBiodata();
-      formBio.resetFields();
+    addUser({
+      variables: {
+        object: {
+          ...values,
+        },
+      },
+      onError: (err) => {
+        message.open({
+          type: "error",
+          content: `${err?.message}`,
+        });
+      },
     });
   };
 
   //   Delete Data from table
   const onDelete = (row_id) => {
-    deleteBiodata(row_id, () => {
-      getBiodata();
+    deleteUser({
+      variables: { id: row_id },
+      onError: (err) => {
+        message.open({
+          type: "error",
+          content: `${err?.message}`,
+        });
+      },
     });
   };
 
@@ -106,15 +139,28 @@ const FormCRUD = () => {
   const onEdit = (values) => {
     const id = rowData.id;
 
-    updateBiodata(id, values, () => {
-      getBiodata();
-      handleCancel();
+    updateUser({
+      variables: { pk_columns: { id: id }, _set: { ...values } },
+      onCompleted: () => {
+        handleCancel();
+      },
+      onError: (err) => {
+        message.open({
+          type: "error",
+          content: `${err?.message}`,
+        });
+      },
     });
   };
 
   useEffect(() => {
-    getBiodata();
-  }, []);
+    if (usersError) {
+      message.open({
+        type: "error",
+        content: `${usersError?.message}`,
+      });
+    }
+  }, [usersError]);
 
   return (
     <>
@@ -212,7 +258,7 @@ const FormCRUD = () => {
             <Button
               type="primary"
               htmlType="submit"
-              loading={isLoadingUpdateBiodata}
+              loading={loadingUpdateUser}
             >
               Save
             </Button>
@@ -221,11 +267,7 @@ const FormCRUD = () => {
             </Button>
           </Space>
         ) : (
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={isLoadingCreateBiodata}
-          >
+          <Button type="primary" htmlType="submit" loading={loadingAddUser}>
             Submit
           </Button>
         )}
@@ -235,13 +277,13 @@ const FormCRUD = () => {
 
       {/* Table */}
       <Table
-        rowKey="id"
+        rowKey="uuid"
         columns={TABLE_COLUMNS}
-        dataSource={biodata}
-        loading={isLoadingBiodata || isLoadingDeleteBiodata}
+        dataSource={usersData?.users}
+        loading={isUsersLoading || loadingDelete}
       />
     </>
   );
 };
 
-export default FormCRUD;
+export default FormCRUD_graph;

@@ -9,6 +9,8 @@ import Portfolio from "../pages/portfolio/Portfolio";
 import AboutMe from "../pages/aboutMe/AboutMe";
 import FormComponentExp from "../pages/formExample/FormComponentExp";
 import FormCRUD from "../pages/crud/FormCRUD";
+import FormCRUDAPI from "../pages/crud/FormCRUD-API";
+import FormCRUD_graph from "../pages/crud/exp/FormCRUD-graph";
 
 const RouteManagement = () => {
   const token = localStorage.getItem("token");
@@ -33,7 +35,8 @@ const RouteManagement = () => {
             <Route path="/form" element={<FormComponent />} />
             <Route path="/form-exp" element={<FormComponentExp />} />
             <Route path="/form-crud" element={<FormCRUD />} />
-
+            <Route path="/form-crud-api" element={<FormCRUDAPI />} />
+            <Route path="/form-crud-exp" element={<FormCRUD_graph />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about-me" element={<AboutMe />} />
             <Route path="/about-me/:id" element={<AboutMe />} />

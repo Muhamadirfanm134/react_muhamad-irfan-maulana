@@ -4,19 +4,19 @@ import { Link } from "react-router-dom";
 export const MENU_ITEM = [
   {
     label: <Link to="/form">Form</Link>,
-    key: "1",
+    key: "/form",
   },
   {
     label: <Link to="/form-crud">Form-CRUD</Link>,
-    key: "2",
+    key: "/form-crud",
   },
   {
     label: <Link to="/portfolio">Portfolio</Link>,
-    key: "3",
+    key: "/portfolio",
   },
   {
     label: <Link to="/about-me">About Me</Link>,
-    key: "4",
+    key: "/about-me",
   },
   {
     label: (

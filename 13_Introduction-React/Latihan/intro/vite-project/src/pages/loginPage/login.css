@@ -6,4 +6,5 @@
   transform: translate(-50%, -50%);
   text-align: center;
   box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
 }

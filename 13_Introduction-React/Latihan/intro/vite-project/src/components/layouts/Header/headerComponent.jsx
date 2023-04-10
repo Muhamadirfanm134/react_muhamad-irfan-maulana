@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 const HeaderComponent = () => {
   const { Header } = Layout;
-  const [current, setCurrent] = useState("1");
+  const path = window.location.pathname;
+  const [current, setCurrent] = useState(path);
   const onClick = (e) => {
     setCurrent(e.key);
   };

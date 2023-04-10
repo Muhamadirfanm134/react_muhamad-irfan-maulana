@@ -1,35 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./aboutMe.css";
-import { USERS_DATA } from "./constants";
 import { Card } from "antd";
+import { useGetUsers } from "./hooks/useUsersData";
+import LoadingComponent from "../../components/loadingComponent/LoadingComponent";
 
 const AboutMe = () => {
   const { id } = useParams();
 
-  const data = id ? USERS_DATA.filter((item) => item.id === id) : USERS_DATA;
+  // Get user data
+  const [isLoadingUsersData, usersData, getUsersData] = useGetUsers();
+
+  console.log({ usersData });
+
+  // Activate custom hook
+  useEffect(() => {
+    getUsersData();
+  }, []);
 
   return (
     <div>
       <h1>About Me</h1>
-      {/* 
-      {data.map((user) => (
-        <Link to={user.id} key={user.id}>
-          <Card className="user-card">
-            <div>{user.name}</div>
-            <div>{user.age}</div>
-            <div>{user.hobby}</div>
-          </Card>
-        </Link>
-      ))} */}
 
-      {USERS_DATA.map((user) => (
-        <Card title={user.name} key={user.id}>
-          <div>{user.hobby}</div>
-          <div>{user.age}</div>
-          <img src={user.thumb} alt="" />
-        </Card>
-      ))}
+      {isLoadingUsersData ? (
+        <LoadingComponent />
+      ) : (
+        usersData?.map((user) => (
+          <Card title={user.firstName + " " + user.lastName} key={user.id}>
+            <div>{user.age}</div>
+            <div>{user.address}</div>
+          </Card>
+        ))
+      )}
     </div>
   );
 };

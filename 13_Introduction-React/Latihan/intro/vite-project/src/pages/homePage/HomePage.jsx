@@ -4,7 +4,6 @@ import { Button, Space } from "antd";
 import { CancelButton } from "../../components/buttonComponent/ButtonComponent";
 import "../aboutMe/aboutMe.css";
 import "./homePage.css";
-import Gap from "../../components/gap/gap";
 
 const HomePage = () => {
   const user = {
@@ -58,8 +57,6 @@ const HomePage = () => {
           Link Button
         </Button>
       </Space>
-
-      <Gap height={10} />
 
       <Space wrap>
         <Button type="primary">Submit</Button>

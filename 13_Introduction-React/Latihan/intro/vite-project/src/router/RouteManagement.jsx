@@ -11,6 +11,7 @@ import FormComponentExp from "../pages/formExample/FormComponentExp";
 import FormCRUD from "../pages/crud/FormCRUD";
 import FormCRUDAPI from "../pages/crud/FormCRUD-API";
 import FormCRUD_graph from "../pages/crud/exp/FormCRUD-graph";
+import LoginPageQuery from "../pages/loginPage/exp/LoginPageQuery";
 
 const RouteManagement = () => {
   const token = localStorage.getItem("token");

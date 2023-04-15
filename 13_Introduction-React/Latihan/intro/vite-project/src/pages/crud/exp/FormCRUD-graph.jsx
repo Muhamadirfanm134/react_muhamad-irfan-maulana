@@ -279,7 +279,7 @@ const FormCRUD_graph = () => {
       <Table
         rowKey="uuid"
         columns={TABLE_COLUMNS}
-        dataSource={usersData?.users}
+        dataSource={usersData?.user}
         loading={isUsersLoading || loadingDelete}
       />
     </>

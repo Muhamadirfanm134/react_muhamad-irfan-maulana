@@ -1,33 +1,34 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Form, Input, Modal, Radio, Row, message } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Gap from "../../components/gap/Gap";
-import "./login.css";
+import Gap from "../../../components/gap/Gap";
+import { useGetProfile, useRegister } from "../hooks/useAuth";
+import "../login.css";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_PROFILE, GET_PROFILE } from "./query/profile-query";
+import { ADD_PROFILE, GET_PROFILE } from "../query/profile-query";
 
-const LoginPage = () => {
+const LoginPageQuery = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [section, setSection] = useState("Login");
 
-  // GraphQL
+  // Graph QL
   const {
-    data: profileData,
-    loading: isProfileLoading,
-    error: isProfileError,
+    data: profile,
+    loading: loadingProfile,
+    error: errorProfile,
   } = useQuery(GET_PROFILE);
 
-  const [register, { loading: isRegisterLoading }] = useMutation(ADD_PROFILE, {
+  const [register, { loading: loadingRegister }] = useMutation(ADD_PROFILE, {
     refetchQueries: [GET_PROFILE],
   });
 
   const onLogin = (values) => {
-    const profile = [...profileData?.profile];
-
-    // Mengecek apakah user existed
-    const isUser = profile.find((item) => item.username === values.username);
+    const profileData = [...profile?.profile];
+    const isUser = profileData?.find(
+      (profile) => profile.username === values.username
+    );
 
     const newValues = {
       __typename: "profile",
@@ -35,9 +36,7 @@ const LoginPage = () => {
       username: values.username,
     };
 
-    // Mengecek apakah user terverifikasi (sesuai dengan data user yang ada)
     const isVerified = JSON.stringify(isUser) === JSON.stringify(newValues);
-
     if (isVerified) {
       localStorage.setItem("token", true);
       navigate("/");
@@ -54,13 +53,10 @@ const LoginPage = () => {
   };
 
   const onRegister = (values) => {
-    const profile = [...profileData?.profile];
-
-    // is user existed?
-    const isExisted = profile?.some(
-      (item) => item.username === values.username
+    const profileData = [...profile?.profile];
+    const isExisted = profileData.some(
+      (profile) => profile.username === values.username
     );
-
     if (!isExisted) {
       register({
         variables: {
@@ -71,7 +67,7 @@ const LoginPage = () => {
         onError: (err) => {
           message.open({
             type: "error",
-            content: `${err.message}`,
+            content: `${err?.message}`,
           });
         },
         onCompleted: () => {
@@ -80,7 +76,8 @@ const LoginPage = () => {
             content: "Please login using your account",
             centered: true,
             onOk() {
-              form.resetFields(), setSection("Login");
+              form.resetFields();
+              setSection("Login");
             },
           });
         },
@@ -152,7 +149,8 @@ const LoginPage = () => {
           <Button
             type="primary"
             htmlType="submit"
-            loading={isRegisterLoading}
+            loading={loadingRegister}
+            disabled={loadingProfile}
             block
           >
             {section === "Login" ? "Login" : "Register"}
@@ -163,4 +161,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginPageQuery;

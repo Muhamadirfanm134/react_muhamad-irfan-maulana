@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 // Read Data
 export const GET_USERS = gql`
   query user {
-    users(order_by: { timeStamp: asc }) {
+    user(order_by: { timeStamp: asc }) {
       address
       firstName
       lastName
@@ -15,8 +15,8 @@ export const GET_USERS = gql`
 
 // Create Data
 export const ADD_USER = gql`
-  mutation user($object: users_insert_input!) {
-    insert_users_one(object: $object) {
+  mutation user($object: user_insert_input!) {
+    insert_user_one(object: $object) {
       id
     }
   }
@@ -24,8 +24,8 @@ export const ADD_USER = gql`
 
 // Update Data
 export const UPDATE_USER = gql`
-  mutation user($pk_columns: users_pk_columns_input!, $_set: users_set_input!) {
-    update_users_by_pk(pk_columns: $pk_columns, _set: $_set) {
+  mutation user($pk_columns: user_pk_columns_input!, $_set: user_set_input!) {
+    update_user_by_pk(pk_columns: $pk_columns, _set: $_set) {
       id
     }
   }
@@ -34,7 +34,7 @@ export const UPDATE_USER = gql`
 // Delete Data
 export const DELETE_USER = gql`
   mutation user($id: uuid!) {
-    delete_users_by_pk(id: $id) {
+    delete_user_by_pk(id: $id) {
       id
     }
   }

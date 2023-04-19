@@ -29,14 +29,8 @@ const LoginPage = () => {
     // Mengecek apakah user existed
     const isUser = profile.find((item) => item.username === values.username);
 
-    const newValues = {
-      __typename: "profile",
-      password: values.password,
-      username: values.username,
-    };
-
     // Mengecek apakah user terverifikasi (sesuai dengan data user yang ada)
-    const isVerified = JSON.stringify(isUser) === JSON.stringify(newValues);
+    const isVerified = JSON.stringify(isUser) === JSON.stringify(values);
 
     if (isVerified) {
       localStorage.setItem("token", true);

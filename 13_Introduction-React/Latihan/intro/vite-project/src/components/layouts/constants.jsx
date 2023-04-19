@@ -11,6 +11,10 @@ export const MENU_ITEM = [
     key: "/form-crud",
   },
   {
+    label: <Link to="/form-crud-exp">Form-CRUD Graph</Link>,
+    key: "/form-crud-exp",
+  },
+  {
     label: <Link to="/portfolio">Portfolio</Link>,
     key: "/portfolio",
   },
@@ -18,6 +22,7 @@ export const MENU_ITEM = [
     label: <Link to="/about-me">About Me</Link>,
     key: "/about-me",
   },
+
   {
     label: (
       <Link to="/">

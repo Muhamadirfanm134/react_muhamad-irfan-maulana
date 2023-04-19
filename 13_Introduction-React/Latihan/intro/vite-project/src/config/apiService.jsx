@@ -7,3 +7,7 @@ export const baseAPI = axios.create({
 export const sheetDBAPI = axios.create({
   baseURL: "https://sheetdb.io/api/v1/8jombd5zduabl",
 });
+
+export const uploaderAPI = axios.create({
+  baseURL: "https://api.cloudinary.com/v1_1",
+});

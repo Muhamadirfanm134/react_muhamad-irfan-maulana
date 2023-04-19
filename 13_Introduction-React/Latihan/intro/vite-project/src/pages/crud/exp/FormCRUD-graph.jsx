@@ -1,3 +1,4 @@
+import { UploadOutlined } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import {
   Button,
@@ -7,10 +8,14 @@ import {
   Space,
   Table,
   Typography,
+  Upload,
   message,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import Gap from "../../../components/gap/Gap";
+import LoadingComponent from "../../../components/loadingComponent/LoadingComponent";
+import { uploaderConfig } from "../../../config/uploader-config";
+import { useSingleUploader } from "../../../hooks/useSingleUploader";
 import { INITIAL_TABLE_DATA } from "../constants";
 import {
   ADD_USER,
@@ -19,10 +24,19 @@ import {
   UPDATE_USER,
 } from "../query/users-query";
 
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
 const FormCRUD_graph = () => {
   const { Title } = Typography;
   const { TextArea } = Input;
   const [formBio] = Form.useForm();
+  const [avatar, setAvatar] = useState("");
 
   // Get Data
   const {
@@ -49,10 +63,25 @@ const FormCRUD_graph = () => {
     refetchQueries: [GET_USERS],
   });
 
+  // Upload Image
+  const [isLoadingUpload, uploadFile] = useSingleUploader();
+
   const [rowData, setRowData] = useState();
   const [isEdit, setIsEdit] = useState(false);
 
   const TABLE_COLUMNS = [
+    {
+      title: "Avatar",
+      dataIndex: "avatar",
+      key: "avatar",
+      render: (_, record, index) => (
+        <img
+          src={record.avatar}
+          alt={`avatar-${index}`}
+          style={{ height: "30px" }}
+        />
+      ),
+    },
     {
       title: "First Name",
       dataIndex: "firstName",
@@ -83,7 +112,7 @@ const FormCRUD_graph = () => {
             <Popconfirm
               title="Sure to delete?"
               arrow={false}
-              onConfirm={() => onDelete(record.id)}
+              onConfirm={() => onDelete(record.uuid)}
             >
               <a>Delete</a>
             </Popconfirm>
@@ -96,10 +125,12 @@ const FormCRUD_graph = () => {
   const handleEdit = (row_data) => {
     setRowData(row_data);
     setIsEdit(true);
+    setAvatar(row_data.avatar);
   };
 
   //   to handle cancel button
   const handleCancel = () => {
+    setAvatar("");
     setRowData();
     setIsEdit(false);
     formBio.resetFields();
@@ -107,10 +138,14 @@ const FormCRUD_graph = () => {
 
   //   Add Data to table
   const onAdd = (values) => {
+    const body = {
+      avatar: avatar,
+      ...values,
+    };
     addUser({
       variables: {
         object: {
-          ...values,
+          ...body,
         },
       },
       onError: (err) => {
@@ -119,13 +154,14 @@ const FormCRUD_graph = () => {
           content: `${err?.message}`,
         });
       },
+      onCompleted: () => setAvatar(""),
     });
   };
 
   //   Delete Data from table
   const onDelete = (row_id) => {
     deleteUser({
-      variables: { id: row_id },
+      variables: { uuid: row_id },
       onError: (err) => {
         message.open({
           type: "error",
@@ -137,10 +173,14 @@ const FormCRUD_graph = () => {
 
   //   Edit Data from table
   const onEdit = (values) => {
-    const id = rowData.id;
+    const uuid = rowData.uuid;
+    const body = {
+      avatar: avatar,
+      ...values,
+    };
 
     updateUser({
-      variables: { pk_columns: { id: id }, _set: { ...values } },
+      variables: { pk_columns: { uuid: uuid }, _set: { ...body } },
       onCompleted: () => {
         handleCancel();
       },
@@ -150,6 +190,20 @@ const FormCRUD_graph = () => {
           content: `${err?.message}`,
         });
       },
+    });
+  };
+
+  // to handle Upload Image
+  const handleUpload = async (file) => {
+    const body = {
+      file: await getBase64(file.file.originFileObj),
+      upload_preset: uploaderConfig.upload_preset,
+      public_id: file.file.name.replace(/\.[^.]*$/, ""),
+      api_key: uploaderConfig.api_key,
+    };
+    uploadFile(body, (data) => {
+      console.log({ data });
+      setAvatar(data.url);
     });
   };
 
@@ -172,8 +226,9 @@ const FormCRUD_graph = () => {
         form={formBio}
         layout="horizontal"
         onFinish={isEdit ? onEdit : onAdd}
+        colon={false}
         style={{
-          width: "600px",
+          width: "800px",
         }}
         labelAlign="left"
         labelCol={{
@@ -225,6 +280,45 @@ const FormCRUD_graph = () => {
           ]}
         >
           <Input placeholder="Input your last name" />
+        </Form.Item>
+
+        <Form.Item label="Avatar">
+          <Upload
+            showUploadList={false}
+            name="file"
+            maxCount={1}
+            onRemove={() => {
+              setAvatar("");
+            }}
+            customRequest={() => {}}
+            onChange={handleUpload}
+          >
+            <Button
+              icon={<UploadOutlined />}
+              type={!avatar ? "dashed" : "default"}
+            >
+              {avatar ? "Change Avatar" : "Upload Avatar"}
+            </Button>
+          </Upload>
+
+          {isLoadingUpload ? (
+            <LoadingComponent />
+          ) : (
+            avatar && (
+              <div>
+                <Gap height={20} />
+                <img
+                  src={avatar}
+                  alt="avatar"
+                  style={{
+                    height: "150px",
+
+                    borderRadius: "10px",
+                  }}
+                />
+              </div>
+            )
+          )}
         </Form.Item>
 
         <Form.Item
@@ -279,7 +373,7 @@ const FormCRUD_graph = () => {
       <Table
         rowKey="uuid"
         columns={TABLE_COLUMNS}
-        dataSource={usersData?.user}
+        dataSource={usersData?.users}
         loading={isUsersLoading || loadingDelete}
       />
     </>

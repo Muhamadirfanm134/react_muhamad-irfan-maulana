@@ -4,6 +4,7 @@ import { Button, Space } from "antd";
 import { CancelButton } from "../../components/buttonComponent/ButtonComponent";
 import "../aboutMe/aboutMe.css";
 import "./homePage.css";
+import Gap from "../../components/gap/Gap";
 
 const HomePage = () => {
   const user = {

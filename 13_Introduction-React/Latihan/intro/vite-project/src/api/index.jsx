@@ -1,4 +1,4 @@
-import { baseAPI, sheetDBAPI } from "../config/apiService";
+import { baseAPI, sheetDBAPI, uploaderAPI } from "../config/apiService";
 
 export const api = {
   // API Auth
@@ -33,5 +33,10 @@ export const api = {
   },
   deleteBiodata: (id) => {
     return baseAPI.delete(`/biodatas/${id}`);
+  },
+
+  // Image Uploader
+  uploader: (body) => {
+    return uploaderAPI.post("/dt5fjvwg6/image/upload", body);
   },
 };

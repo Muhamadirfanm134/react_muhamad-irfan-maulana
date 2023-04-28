@@ -1,17 +1,16 @@
 import React, { Suspense, useEffect } from "react";
-import LoadingComponent from "../components/loadingComponent/LoadingComponent";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import LoginPage from "../pages/loginPage/LoginPage";
-import FormComponent from "../pages/form/FormComponent";
 import LayoutComponent from "../components/layouts/LayoutComponent";
-import HomePage from "../pages/homePage/HomePage";
-import Portfolio from "../pages/portfolio/Portfolio";
+import LoadingComponent from "../components/loadingComponent/LoadingComponent";
 import AboutMe from "../pages/aboutMe/AboutMe";
-import FormComponentExp from "../pages/formExample/FormComponentExp";
 import FormCRUD from "../pages/crud/FormCRUD";
 import FormCRUDAPI from "../pages/crud/FormCRUD-API";
 import FormCRUD_graph from "../pages/crud/exp/FormCRUD-graph";
-import LoginPageQuery from "../pages/loginPage/exp/LoginPageQuery";
+import FormComponent from "../pages/form/FormComponent";
+import FormComponentExp from "../pages/formExample/FormComponentExp";
+import HomePage from "../pages/homePage/HomePage";
+import LoginPage from "../pages/loginPage/LoginPage";
+import Portfolio from "../pages/portfolio/Portfolio";
 import ProductPage from "../pages/productPage/ProductPage";
 
 const RouteManagement = () => {
@@ -42,6 +41,7 @@ const RouteManagement = () => {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about-me" element={<AboutMe />} />
             <Route path="/about-me/:id" element={<AboutMe />} />
+            <Route path="/product" element={<ProductPage />} />
           </Routes>
         </LayoutComponent>
       )}

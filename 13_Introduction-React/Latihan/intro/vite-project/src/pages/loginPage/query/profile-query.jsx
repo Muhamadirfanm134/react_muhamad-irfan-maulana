@@ -5,7 +5,6 @@ export const GET_PROFILE = gql`
     profile {
       username
       password
-      isAdmin
     }
   }
 `;

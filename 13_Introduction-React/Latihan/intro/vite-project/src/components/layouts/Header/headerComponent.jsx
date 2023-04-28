@@ -16,7 +16,7 @@ const HeaderComponent = () => {
       style={{
         position: "sticky",
         top: 0,
-        zIndex: 1,
+        zIndex: 3,
         width: "100%",
       }}
     >

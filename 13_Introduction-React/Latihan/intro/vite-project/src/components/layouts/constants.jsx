@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 export const MENU_ITEM = [
   {
-    label: <Link to="/form">Form</Link>,
-    key: "/form",
+    label: <Link to="/product">Search Exp</Link>,
+    key: "/product",
   },
   {
     label: <Link to="/form-crud">Form-CRUD</Link>,

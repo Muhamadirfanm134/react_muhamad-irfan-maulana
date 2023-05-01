@@ -126,12 +126,18 @@ const FormCRUD_graph = () => {
     setRowData(row_data);
     setIsEdit(true);
     setAvatar(row_data.avatar);
+    formBio.setFieldsValue({
+      firstName: row_data.firstName,
+      lastName: row_data.lastName,
+      nim: row_data.nim,
+      address: row_data.address,
+    });
   };
 
   //   to handle cancel button
   const handleCancel = () => {
-    setAvatar("");
     setRowData();
+    setAvatar("");
     setIsEdit(false);
     formBio.resetFields();
   };
@@ -154,7 +160,7 @@ const FormCRUD_graph = () => {
           content: `${err?.message}`,
         });
       },
-      onCompleted: () => setAvatar(""),
+      onCompleted: () => handleCancel(),
     });
   };
 
@@ -202,7 +208,6 @@ const FormCRUD_graph = () => {
       api_key: uploaderConfig.api_key,
     };
     uploadFile(body, (data) => {
-      console.log({ data });
       setAvatar(data.url);
     });
   };
@@ -237,24 +242,6 @@ const FormCRUD_graph = () => {
         wrapperCol={{
           span: 14,
         }}
-        fields={[
-          {
-            name: ["firstName"],
-            value: rowData?.firstName,
-          },
-          {
-            name: ["lastName"],
-            value: rowData?.lastName,
-          },
-          {
-            name: ["nim"],
-            value: rowData?.nim,
-          },
-          {
-            name: ["address"],
-            value: rowData?.address,
-          },
-        ]}
       >
         <Form.Item
           name="firstName"

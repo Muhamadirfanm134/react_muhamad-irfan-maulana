@@ -5,6 +5,7 @@ import { GET_PRODUCT } from "./query/product-query";
 import { Card, Col, Input, Result, Row } from "antd";
 import LoadingComponent from "../../components/loadingComponent/LoadingComponent";
 import { SearchOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   // Get Data
@@ -51,12 +52,14 @@ const ProductPage = () => {
             <Row gutter={[10]} justify="start">
               {data?.map((item) => (
                 <Col key={item.uuid} span={12}>
-                  <Card title={item.productName} style={{ margin: "20px" }}>
-                    <div>
-                      <b>{item.price}</b>
-                    </div>
-                    <div>{item.stock}</div>
-                  </Card>
+                  <Link to={`/product/${item.uuid}`}>
+                    <Card title={item.productName} style={{ margin: "20px" }}>
+                      <div>
+                        <b>{item.price}</b>
+                      </div>
+                      <div>{item.stock}</div>
+                    </Card>
+                  </Link>
                 </Col>
               ))}
             </Row>

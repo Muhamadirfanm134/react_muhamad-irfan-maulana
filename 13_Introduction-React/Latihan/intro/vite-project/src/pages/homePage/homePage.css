@@ -19,3 +19,16 @@
   background-color: #333333;
   color: #fff;
 }
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover {
+  font-size: inherit;
+  color: #fff !important;
+  background-color: #333333 !important;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  border-radius: 20px;
+}

@@ -1,10 +1,11 @@
 import React from "react";
 import reactLogo from "../../assets/images/react.svg";
-import { Button, Space } from "antd";
+import { Button, Carousel, Space, Row, Col, Card } from "antd";
 import { CancelButton } from "../../components/buttonComponent/ButtonComponent";
 import "../aboutMe/aboutMe.css";
 import "./homePage.css";
 import Gap from "../../components/gap/Gap";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 const HomePage = () => {
   const user = {
@@ -14,6 +15,8 @@ const HomePage = () => {
     aboutMe: "lorem ipsum",
     imageLocal: reactLogo,
   };
+
+  const arr = ["1", "2", "3", "4"];
 
   return (
     <div>
@@ -65,6 +68,24 @@ const HomePage = () => {
       </Space>
 
       <Button type="primary">Ini Button</Button>
+
+      <Gap height={30} />
+
+      <Row justify="center">
+        <Col span={4}>
+          <Carousel
+            arrows={true}
+            prevArrow={<LeftOutlined />}
+            nextArrow={<RightOutlined />}
+          >
+            {arr.map((item) => (
+              <Card>
+                <h3>{item}</h3>
+              </Card>
+            ))}
+          </Carousel>
+        </Col>
+      </Row>
     </div>
   );
 };

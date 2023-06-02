@@ -29,7 +29,7 @@ export const MENU_ITEM = [
         <Button
           type="primary"
           onClick={() => {
-            localStorage.removeItem("token");
+            localStorage.removeItem("access_token");
           }}
           danger
         >

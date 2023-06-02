@@ -1,4 +1,12 @@
-import { baseAPI, sheetDBAPI, uploaderAPI } from "../config/apiService";
+import {
+  baseAPI,
+  newBaseAPI,
+  newBaseAPIwithToken,
+  sheetDBAPI,
+  uploaderAPI,
+} from "../config/apiService";
+
+const token = localStorage.getItem("access_token");
 
 export const api = {
   // API Auth
@@ -38,5 +46,16 @@ export const api = {
   // Image Uploader
   uploader: (body) => {
     return uploaderAPI.post("/dt5fjvwg6/image/upload", body);
+  },
+
+  /// API with Token
+  // Login
+  login: (body) => {
+    return newBaseAPI.post("/auth/login", body);
+  },
+
+  // Get Auth Profile
+  getAuthProfile: () => {
+    return newBaseAPIwithToken.get("/auth/profile");
   },
 };

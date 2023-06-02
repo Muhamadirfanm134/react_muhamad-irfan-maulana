@@ -16,7 +16,7 @@ import Contentful from "../pages/contentful/Contentful";
 import ProductDetail from "../pages/productPage/components/ProductDetail";
 
 const RouteManagement = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
 
   useEffect(() => {

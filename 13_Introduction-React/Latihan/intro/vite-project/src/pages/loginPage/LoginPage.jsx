@@ -6,6 +6,7 @@ import Gap from "../../components/gap/Gap";
 import "./login.css";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_PROFILE, GET_PROFILE } from "./query/profile-query";
+import { useLogin } from "./hooks/useAuth";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
@@ -23,28 +24,35 @@ const LoginPage = () => {
     refetchQueries: [GET_PROFILE],
   });
 
+  // API Login
+  const [isLoadingLogin, login] = useLogin();
+
   const onLogin = (values) => {
-    const profile = [...profileData?.profile];
-
-    // Mengecek apakah user existed
-    const isUser = profile.find((item) => item.username === values.username);
-
-    // Mengecek apakah user terverifikasi (sesuai dengan data user yang ada)
-    const isVerified = JSON.stringify(isUser) === JSON.stringify(values);
-
-    if (isVerified) {
-      localStorage.setItem("token", true);
+    login(values, () => {
       navigate("/");
-    } else {
-      Modal.warning({
-        title: "Login Failed!",
-        content: "Username/password is not correct",
-        centered: true,
-        onOk() {
-          setSection("Login");
-        },
-      });
-    }
+    });
+
+    // const profile = [...profileData?.profile];
+
+    // // Mengecek apakah user existed
+    // const isUser = profile.find((item) => item.username === values.username);
+
+    // // Mengecek apakah user terverifikasi (sesuai dengan data user yang ada)
+    // const isVerified = JSON.stringify(isUser) === JSON.stringify(values);
+
+    // if (isVerified) {
+    //   localStorage.setItem("token", true);
+    //   navigate("/");
+    // } else {
+    //   Modal.warning({
+    //     title: "Login Failed!",
+    //     content: "Username/password is not correct",
+    //     centered: true,
+    //     onOk() {
+    //       setSection("Login");
+    //     },
+    //   });
+    // }
   };
 
   const onRegister = (values) => {
@@ -116,7 +124,7 @@ const LoginPage = () => {
           onFinish={section === "Login" ? onLogin : onRegister}
         >
           <Form.Item
-            name="username"
+            name="email"
             rules={[
               {
                 required: true,
@@ -146,7 +154,7 @@ const LoginPage = () => {
           <Button
             type="primary"
             htmlType="submit"
-            loading={isRegisterLoading}
+            loading={isLoadingLogin}
             block
           >
             {section === "Login" ? "Login" : "Register"}

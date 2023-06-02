@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import reactLogo from "../../assets/images/react.svg";
 import { Button, Carousel, Space, Row, Col, Card } from "antd";
 import { CancelButton } from "../../components/buttonComponent/ButtonComponent";
@@ -6,6 +6,8 @@ import "../aboutMe/aboutMe.css";
 import "./homePage.css";
 import Gap from "../../components/gap/Gap";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { useGetAuthProfile } from "./hooks/useContoh";
+import LoadingComponent from "../../components/loadingComponent/LoadingComponent";
 
 const HomePage = () => {
   const user = {
@@ -18,75 +20,32 @@ const HomePage = () => {
 
   const arr = ["1", "2", "3", "4"];
 
+  // Get Auth Profile
+  const [isLoadingAuthProfile, authProfile, getAuthProfile] =
+    useGetAuthProfile();
+
+  console.log({ authProfile });
+
+  useEffect(() => {
+    getAuthProfile();
+  }, []);
+
   return (
-    <div>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-
-      <div className="homepage">Home Page</div>
-      <div className="about-me">About Me Page</div>
-
-      <div className="card">
-        {/* <img src={DesignerImage} alt="" /> */}
-        <div>{user.name}</div>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
-      <br />
-      <br />
-
-      {/* AntD Component */}
-      <Space wrap>
-        <Button type="primary" href="/login">
-          Coba Button
-        </Button>
-        <Button>Default Button</Button>
-        <Button type="dashed">Dashed Button</Button>
-        <Button type="text" href="/login">
-          Text Button
-        </Button>
-        <Button type="link" href="/login">
-          Link Button
-        </Button>
-      </Space>
-
-      <Space wrap>
-        <Button type="primary">Submit</Button>
-        <CancelButton text="Cancel" />
-      </Space>
-
-      <Button type="primary">Ini Button</Button>
-
-      <Gap height={30} />
-
-      <Row justify="center">
-        <Col span={4}>
-          <Carousel
-            arrows={true}
-            prevArrow={<LeftOutlined />}
-            nextArrow={<RightOutlined />}
-          >
-            {arr.map((item) => (
-              <Card>
-                <h3>{item}</h3>
-              </Card>
-            ))}
-          </Carousel>
-        </Col>
-      </Row>
-    </div>
+    <>
+      {isLoadingAuthProfile ? (
+        <LoadingComponent />
+      ) : (
+        <div>
+          <h1>Test Profile</h1>
+          <div>{authProfile?.name}</div>
+          <img
+            src={authProfile?.avatar}
+            alt="avatar"
+            style={{ width: "200px" }}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
